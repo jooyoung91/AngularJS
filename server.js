@@ -5,6 +5,6 @@ var multer  = require('multer');
 var fs = require("fs");
 var connect = require('connect');
 
-//var app = express();
-
-connect.creteServer(connect.static("../angularjs")).listen(5000);
+var app = connect();
+app.use(serveStatic("../AngularJS"));
+app.listen(8080);
