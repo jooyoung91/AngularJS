@@ -6,15 +6,22 @@
   <link href="/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
   <link href="/node_modules/bootstrap/dist/css/bootstrap-theme.css"  rel="stylesheet" />
   <script>
-    var todoApp = angular.module("todoApp", []);
     var model = {
-        user : "Young",
-        items : [
-            {action:  "Yard work", done: true},
-            {action:  "Study", done: false},
-            {action:  "Cook", done: false},
-            {action:  "Work out", done: true}]
+        user : "Young"
+        // ,
+        // items : [
+        //     {action:  "Yard work", done: true},
+        //     {action:  "Study", done: false},
+        //     {action:  "Cook", done: false},
+        //     {action:  "Work out", done: true}]
     };
+    var todoApp = angular.module("todoApp", []);
+
+    todoApp.run(function ($http) {
+        $http.get("todo.json").success(function (data) {
+            model.items = data;
+        });
+    });
 
     todoApp.filter("checkedItems", function () {
         return function(items, showComplete)
